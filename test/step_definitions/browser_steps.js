@@ -28,7 +28,9 @@ When(/^I populate "([^"]*)" in "Job Input" field$/, async function(keyword) {
 });
 
 When(/^I select "([^"]*)" location in "Location" dropdown$/, async function(locationValue) {
+    let learnMoreButton = element(by.xpath('(//a[descendant::*[contains(text(), \'Learn more\')]][ancestor::div[contains(@class, \'button\')]])[1]'));
     let locationArrow = element(by.xpath('//span[@class="select2-selection__arrow"]'));
+    await browser.executeScript('arguments[0].scrollIntoView()', learnMoreButton);
     await locationArrow.click();
     await browser.sleep(1000);
     let locationDropdownValue = element(by.xpath(`//li[@role='option'][text()='${locationValue}']`));
